@@ -96,6 +96,21 @@ class CipherMessage():
         shuffled_eyes = ''.join(random.sample(self.string,len(self.string)))
         return CipherMessage(msg_str = shuffled_eyes)
 
+    def random_eyes(self, len = None):
+        """
+        generates random set of eye glyphs. If no length is given,
+        assumes the length of the current cipher text
+
+        Args:
+            len(int): length of eye glyph message to generate
+        Returns: 
+            (CipherMessage): A shuffled CipherMessage
+        """
+        #random_eyes = [random.randrange(0,5,1)]
+        #shuffled_eyes = ''.join(random.sample(self.eyes,len(self.eyes)))
+        #return CipherMessage(eyes = shuffled_eyes)
+        pass
+
 if __name__ == "__main__":
     # Define cipher file locations
     east1 =  os.path.join("cipher_data", "interleaved", "east1")
