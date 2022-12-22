@@ -96,7 +96,7 @@ class CipherMessage():
         shuffled_eyes = ''.join(random.sample(self.string,len(self.string)))
         return CipherMessage(msg_str = shuffled_eyes)
 
-    def random_eyes(self, len = None):
+    def random_eyes(self, length = None):
         """
         generates random set of eye glyphs. If no length is given,
         assumes the length of the current cipher text
@@ -106,10 +106,12 @@ class CipherMessage():
         Returns: 
             (CipherMessage): A shuffled CipherMessage
         """
-        #random_eyes = [random.randrange(0,5,1)]
-        #shuffled_eyes = ''.join(random.sample(self.eyes,len(self.eyes)))
-        #return CipherMessage(eyes = shuffled_eyes)
-        pass
+        if length == None:
+                length = len(self.eyes)
+
+        random_eyes = [random.randrange(0,5,1) for i in range(length)]
+        random_eyes = ''.join(str(i) for i in random_eyes)
+        return CipherMessage(eyes = random_eyes)
 
 if __name__ == "__main__":
     # Define cipher file locations
@@ -118,7 +120,7 @@ if __name__ == "__main__":
     print(east1)
 
     message = CipherMessage(file_name = east1)
-    #import pdb; pdb.set_trace()
+    import pdb; pdb.set_trace()
     print(message.eyes)
     print(message.trigrams)
     print(message.base_10)
