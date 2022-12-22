@@ -1,3 +1,4 @@
+from collections import Counter
 import numpy as np
 import os
 import random
@@ -53,6 +54,18 @@ class CipherMessage():
     def string(self):
         return ''.join([ chr(i+32) for i in self.base_10])
     
+    @property
+    def unique_trigrams(self):
+            return [*self.counter_unique_trigrams.keys()]
+
+    @property
+    def num_unique_trigrams(self):
+            return len(Counter(self.trigrams))
+
+    @property
+    def counter_unique_trigrams(self):
+            return Counter(self.trigrams)
+
     def __add__(self, other):
         return CipherMessage(eyes = self.eyes + other.eyes)
 
@@ -113,15 +126,29 @@ class CipherMessage():
         random_eyes = ''.join(str(i) for i in random_eyes)
         return CipherMessage(eyes = random_eyes)
 
-if __name__ == "__main__":
+    def drop_every_n_trigrams(self, n, start=0):
+        """
+        Drops every nth trigram from the cipher, starting from the offset given
+
+        Args:
+            n (int): number of characters to drop. (i.e. every nth character will be skipped)
+            start (int): offset for star of skipping. Default 0 assumes start with reading first char
+        """
+        dropped_string = ''.join(self.message.string[0:start] + self.message.string[start::n] )
+        return CipherMessage(msg_str = dropped_string)
+
+def main():
     # Define cipher file locations
     east1 =  os.path.join("cipher_data", "interleaved", "east1")
     #west1 =
     print(east1)
 
     message = CipherMessage(file_name = east1)
-    import pdb; pdb.set_trace()
+    #import pdb; pdb.set_trace()
     print(message.eyes)
     print(message.trigrams)
     print(message.base_10)
     print(message.string)
+
+if __name__ == "__main__":
+    main()
