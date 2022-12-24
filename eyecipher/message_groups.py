@@ -5,7 +5,14 @@ class MessageGroup():
     """
     A class representing a group of messages
     """
-    def __init__(self):
+    def __init__(self, messages = []):
+        """
+        Args:
+            messages(list[CipherMessage])
+        """
+        self.messages = messages
+
+    def __add__(self, other):
         pass
 
 def main():

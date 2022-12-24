@@ -66,6 +66,11 @@ class CipherMessage():
     def counter_unique_trigrams(self):
             return Counter(self.trigrams)
 
+    @property
+    def bigrams(self):
+        return Counter([self.string[i:i+2] for i in range(len(self.string) -1)])
+
+    @property
     def __add__(self, other):
         return CipherMessage(eyes = self.eyes + other.eyes)
 
@@ -136,6 +141,12 @@ class CipherMessage():
         """
         dropped_string = ''.join(self.message.string[0:start] + self.message.string[start::n] )
         return CipherMessage(msg_str = dropped_string)
+
+    def shift_trigrams_right(self, spaces):
+        pass
+
+    def shift_trigrams_left(self, spaces):
+        pass
 
 def main():
     # Define cipher file locations
